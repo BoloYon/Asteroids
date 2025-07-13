@@ -1,0 +1,1 @@
+#1: When clicking 3 buttons, the movement speed is increased. Example (left, right, up) makes up go faster.

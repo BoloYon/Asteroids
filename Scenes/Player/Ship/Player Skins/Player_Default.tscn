@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://b746qw4euf53o"]
+
+[ext_resource type="Script" uid="uid://dnotfgglhm053" path="res://Scripts/Player/Player_Functionality.gd" id="1_dgq2h"]
+[ext_resource type="Texture2D" uid="uid://bxdvthqbbcn4" path="res://Sprites/Player/Player Skins/Basic Cursor.png" id="2_imd0c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wxgq8"]
+size = Vector2(60, 83)
+
+[node name="PlayerDefault" type="CharacterBody2D"]
+position = Vector2(385, 360)
+motion_mode = 1
+script = ExtResource("1_dgq2h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 1.83588e-06)
+rotation = 1.5708
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("2_imd0c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.83588e-06)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_wxgq8")
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(0, 0, 968, 0)
