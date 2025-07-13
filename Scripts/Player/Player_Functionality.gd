@@ -15,6 +15,7 @@ func _physics_process(delta: float):
 	#Shoot if shoot button is pressed
 	if Input.is_action_pressed("Shoot") and can_shoot:
 		shoot()
+	GameManager.set_player_pos(self.position)
 	
 	
 
@@ -34,24 +35,41 @@ func move_player(delta: float) -> void :
 	
 	#Initializing logic that detects if we are currently going diagonal
 	var diag_active := false
+	var three_buttons := false
+	var count := 0
 	
-	#Combination
-	if Up and Right:
-		pos.y -= diag_accel
-		pos.x += diag_accel
-		diag_active = true
-	if Up and Left:
-		pos.y -= diag_accel
-		pos.x -= diag_accel
-		diag_active = true
-	if Down and Right:
-		pos.y += diag_accel
-		pos.x += diag_accel
-		diag_active = true
-	if Down and Left:
-		pos.y += diag_accel
-		pos.x -= diag_accel
-		diag_active = true
+	#Bug Fix: Holding W,A, and D or another combo of 3 numbers causes combination and regular speed to add together
+	#Error Fix
+	###
+	if Up:
+		count +=1
+	if Down:
+		count +=1
+	if Right:
+		count +=1
+	if Left:
+		count +=1
+		
+	if count >= 3:
+		three_buttons = true
+	if not three_buttons:
+		#Combination
+		if Up and Right:
+			pos.y -= diag_accel
+			pos.x += diag_accel
+			diag_active = true
+		if Up and Left:
+			pos.y -= diag_accel
+			pos.x -= diag_accel
+			diag_active = true
+		if Down and Right:
+			pos.y += diag_accel
+			pos.x += diag_accel
+			diag_active = true
+		if Down and Left:
+			pos.y += diag_accel
+			pos.x -= diag_accel
+			diag_active = true
 	
 	#Regular directions
 	if not diag_active:
@@ -66,7 +84,6 @@ func move_player(delta: float) -> void :
 	
 	#Set position
 	self.position = pos
-
 
 func shoot():
 	#Set boolean to false for cooldown

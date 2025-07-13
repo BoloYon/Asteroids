@@ -7,7 +7,7 @@
 size = Vector2(60, 83)
 
 [node name="PlayerDefault" type="CharacterBody2D"]
-position = Vector2(385, 360)
+position = Vector2(512, 241)
 motion_mode = 1
 script = ExtResource("1_dgq2h")
 
@@ -17,7 +17,7 @@ rotation = 1.5708
 scale = Vector2(0.04, 0.04)
 texture = ExtResource("2_imd0c")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Player_Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1.83588e-06)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_wxgq8")
