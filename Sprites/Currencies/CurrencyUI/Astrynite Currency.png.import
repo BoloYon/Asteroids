@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3njvldvg1nxd"
-path="res://.godot/imported/Asteroid Basic.png-72ae5223891ab76534efd897a2917ba9.ctex"
+uid="uid://tixjsth2fqll"
+path="res://.godot/imported/Astrynite Currency.png-ded749fc8e9519e4d0b938f9c4ebd5b9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Asteroids/Asteroid Basic.png"
-dest_files=["res://.godot/imported/Asteroid Basic.png-72ae5223891ab76534efd897a2917ba9.ctex"]
+source_file="res://Sprites/Currencies/CurrencyUI/Astrynite Currency.png"
+dest_files=["res://.godot/imported/Astrynite Currency.png-ded749fc8e9519e4d0b938f9c4ebd5b9.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

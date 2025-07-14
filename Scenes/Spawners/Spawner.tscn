@@ -6,7 +6,3 @@
 [node name="Spawner" type="Node2D"]
 script = ExtResource("1_alich")
 Asteroid_Scene = ExtResource("2_sx76e")
-
-[node name="Line2D" type="Line2D" parent="."]
-visible = false
-points = PackedVector2Array(0, 0, 3020, 0)

@@ -1,9 +1,12 @@
 extends Node2D
 
 @export var speed : float = 300.0
+@export var bullet_damage: float
 
 var can_shoot = true
 
+func _ready():
+	GameManager.set_bullet_damage(bullet_damage)
 ##Basic Movement Functionality
 func _physics_process(delta: float):
 	#Move the player based on input
@@ -129,4 +132,11 @@ func wrap_screen():
 	#Set the position
 	self.position = player_pos
 		
+		
+
+
+func _on_player_hitbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Asteroid"):
+		print("COLLISION DETECTED, ", area)
+		get_parent().get_tree().reload_current_scene()
 		
