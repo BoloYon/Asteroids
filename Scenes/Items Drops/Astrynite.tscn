@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqsmhy0cywn76"]
+
+[ext_resource type="Script" uid="uid://8uwrrw8bw4w4" path="res://Scripts/Currencies/Drops/AstryniteItemDrop.gd" id="1_ilc0l"]
+[ext_resource type="Texture2D" uid="uid://c7tqkms5ilsdg" path="res://Sprites/Currencies/Drops/Astrynite.png" id="2_ipt0r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xxn6l"]
+radius = 20.0
+
+[node name="Astrynite" type="Area2D" groups=["Drops"]]
+position = Vector2(1144, 688)
+script = ExtResource("1_ilc0l")
+multiplier = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("2_ipt0r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xxn6l")
+
+[connection signal="area_entered" from="." to="." method="_on_astrynite_area_entered"]

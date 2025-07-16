@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://p4csjwubyjuq"]
+
+[ext_resource type="Script" uid="uid://cmvbjn2fk6j00" path="res://Scripts/Spawners/ItemDrop.gd" id="1_27a4k"]
+
+[node name="ItemDrops" type="Node2D" groups=["Drops"]]
+script = ExtResource("1_27a4k")

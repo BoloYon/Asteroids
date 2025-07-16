@@ -14,11 +14,11 @@ config/name="Asteroids"
 run/main_scene="uid://bdkyfar1vhp0"
 config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=240
-config/icon="res://icon.svg"
 
 [autoload]
 
 GameManager="*res://Scripts/GLOBALS/GameManager.gd"
+ItemDrop="*res://Scripts/Spawners/ItemDrop.gd"
 
 [debug]
 
@@ -36,6 +36,7 @@ Player="All Player Related Scenes"
 Bullet="All Bullet Related Scenes"
 Enemy="All enemy related scenes"
 Asteroid=""
+Drops="All item drop scenes"
 
 [input]
 

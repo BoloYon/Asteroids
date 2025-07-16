@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1jxffnlkq8ke"]
+
+[ext_resource type="Script" uid="uid://dvqmi32v0nmr3" path="res://Scripts/UI/Material_List.gd" id="1_8t2sl"]
+[ext_resource type="Texture2D" uid="uid://tixjsth2fqll" path="res://Sprites/Currencies/CurrencyUI/Astrynite Currency.png" id="1_ka5xt"]
+[ext_resource type="FontFile" uid="uid://e4iuksqey7qm" path="res://Fonts/Inter Fonts/Inter_18pt-Bold.ttf" id="2_8t2sl"]
+
+[node name="MaterialList" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 7.0
+offset_top = 55.0
+offset_right = 7.0
+offset_bottom = 55.0
+scale = Vector2(0.66, 0.66)
+script = ExtResource("1_8t2sl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.035, 0.035)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_ka5xt")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Astrynite" type="Label" parent="."]
+layout_mode = 2
+offset_left = 80.303
+offset_top = -9.09091
+offset_right = 1198.3
+offset_bottom = 2013.91
+scale = Vector2(0.036, 0.045)
+theme_override_fonts/font = ExtResource("2_8t2sl")
+theme_override_font_sizes/font_size = 1671
+text = "0"

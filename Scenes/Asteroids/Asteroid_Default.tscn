@@ -12,12 +12,12 @@ scale = Vector2(0.12, 0.12)
 script = ExtResource("1_xb1l8")
 lifetime = 10.0
 health = 5.0
+DropAmount = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_kj541")
 
 [node name="Hitbox" type="Area2D" parent="." groups=["Asteroid"]]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_a2w70")

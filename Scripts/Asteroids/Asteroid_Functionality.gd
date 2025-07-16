@@ -4,12 +4,12 @@ extends Node2D
 @export var size: float
 @export var health: float
 @export var Asteroid_Scene : PackedScene = preload("res://Scenes/Asteroids/Asteroid_Default.tscn")
+@export var DropAmount: int
 
 var accel : float
 
 func _ready():
 	scale = Vector2(size, size)
-	print(Asteroid_Scene)
 	
 func _physics_process(delta: float) -> void:
 	move_asteroid(delta)
@@ -26,6 +26,12 @@ func _on_asteroid_hitbox_area_entered(area: Area2D) -> void:
 			break_asteroid()
 		
 func break_asteroid():
+	asteroid_break_logic()
+	
+
+
+func asteroid_break_logic():
+	var parent = get_parent()
 	if self.size >= 0.06 and not is_in_group("BabyAsteroid"):
 		for i in range(randi_range(2, 3)):
 			var new_asteroid = Asteroid_Scene.instantiate()
@@ -38,3 +44,6 @@ func break_asteroid():
 			queue_free()
 	else:
 		queue_free()
+	
+	#Drop astrynite on break
+	ItemDrop.drop_astrynite(self.position, DropAmount, parent)

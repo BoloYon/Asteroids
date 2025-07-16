@@ -18,7 +18,7 @@ func _physics_process(delta: float):
 	#Shoot if shoot button is pressed
 	if Input.is_action_pressed("Shoot") and can_shoot:
 		shoot()
-	GameManager.set_player_pos(self.position)
+	GameManager.current_player_pos(self.position)
 	
 	
 
@@ -138,5 +138,6 @@ func wrap_screen():
 func _on_player_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Asteroid"):
 		print("COLLISION DETECTED, ", area)
+		GameManager.resources["Astrynite"] = 0
 		get_parent().get_tree().reload_current_scene()
 		
