@@ -26,12 +26,18 @@ func _on_asteroid_hitbox_area_entered(area: Area2D) -> void:
 			break_asteroid()
 		
 func break_asteroid():
+	var parent = get_parent()
+	ItemDrop.drop_astrynite(self.position, DropAmount, parent, accel, self.rotation)
 	asteroid_break_logic()
 	
 
 
 func asteroid_break_logic():
-	var parent = get_parent()
+	
+	#Drop astrynite on break
+	
+	#self.hide()
+	#await get_tree().create_timer(0.15).timeout
 	if self.size >= 0.06 and not is_in_group("BabyAsteroid"):
 		for i in range(randi_range(2, 3)):
 			var new_asteroid = Asteroid_Scene.instantiate()
@@ -45,5 +51,4 @@ func asteroid_break_logic():
 	else:
 		queue_free()
 	
-	#Drop astrynite on break
-	ItemDrop.drop_astrynite(self.position, DropAmount, parent)
+	
