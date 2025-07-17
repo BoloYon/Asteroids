@@ -19,8 +19,6 @@ func _physics_process(delta: float):
 	if Input.is_action_pressed("Shoot") and can_shoot:
 		shoot()
 	GameManager.current_player_pos(self.position)
-	
-	
 
 func move_player(delta: float) -> void :
 	#Initializing Cardinal Directions
@@ -33,8 +31,8 @@ func move_player(delta: float) -> void :
 	var pos := self.position
 	
 	#Initilalizing Speeds
-	var accel := speed*delta
-	var diag_accel := (sqrt(2 * pow(speed, 2)) * delta)/2
+	var accel : float = ((speed + CUps.upgrades["Speed"]["level"] * CUps.upgrades["Speed"]["effect_per_level"]) * delta) 
+	var diag_accel := (sqrt(2 * pow(speed + (CUps.upgrades["Speed"]["level"] * CUps.upgrades["Speed"]["effect_per_level"]), 2)) * delta)/2
 	
 	#Initializing logic that detects if we are currently going diagonal
 	var diag_active := false
@@ -96,13 +94,14 @@ func shoot():
 	bullet.position = global_position
 	bullet.rotation = rotation #Where the ship is actually facing
 	bullet.lifetime = 5.0
+	bullet.penetration = CUps.upgrades["Penetration"]["level"] * CUps.upgrades["Penetration"]["effect_per_level"]
+	
 	get_parent().add_child(bullet)
 	
 	#Cooldown
 	await get_tree().create_timer(1).timeout
 	can_shoot = true
-	
-	
+
 func face_mouse():
 	look_at(get_global_mouse_position())
 
@@ -131,13 +130,10 @@ func wrap_screen():
 		
 	#Set the position
 	self.position = player_pos
-		
-		
-
 
 func _on_player_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Asteroid"):
 		print("COLLISION DETECTED, ", area)
 		GameManager.resources["Astrynite"] = 0
+		CUps.reset()
 		get_parent().get_tree().reload_current_scene()
-		

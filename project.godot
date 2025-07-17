@@ -19,10 +19,7 @@ run/max_fps=240
 
 GameManager="*res://Scripts/GLOBALS/GameManager.gd"
 ItemDrop="*res://Scripts/Spawners/ItemDrop.gd"
-
-[debug]
-
-settings/stdout/print_fps=true
+CUps="*res://Scripts/GLOBALS/Current_Upgrades.gd"
 
 [display]
 

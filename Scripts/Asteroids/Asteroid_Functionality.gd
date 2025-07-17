@@ -6,13 +6,32 @@ extends Node2D
 @export var Asteroid_Scene : PackedScene = preload("res://Scenes/Asteroids/Asteroid_Default.tscn")
 @export var DropAmount: int
 
+
 var accel : float
+
+#Get Viewport size
+var rect
+	
+#Define the sides (edges) for easier understanding
+var left : float
+var right : float
+var up : float
+var down : float
 
 func _ready():
 	scale = Vector2(size, size)
+	var rect = get_viewport().get_visible_rect()
+	
+#Define the sides (edges) for easier understanding
+	left = rect.position.x
+	right = rect.position.x + rect.size.x
+	up = rect.position.y
+	down = rect.position.y + rect.size.y
+	
 	
 func _physics_process(delta: float) -> void:
 	move_asteroid(delta)
+	is_out_of_view()
 	
 func move_asteroid(delta: float):
 	position += Vector2.RIGHT.rotated(rotation) * accel * delta
@@ -33,11 +52,6 @@ func break_asteroid():
 
 
 func asteroid_break_logic():
-	
-	#Drop astrynite on break
-	
-	#self.hide()
-	#await get_tree().create_timer(0.15).timeout
 	if self.size >= 0.06 and not is_in_group("BabyAsteroid"):
 		for i in range(randi_range(2, 3)):
 			var new_asteroid = Asteroid_Scene.instantiate()
@@ -50,5 +64,14 @@ func asteroid_break_logic():
 			queue_free()
 	else:
 		queue_free()
-	
+
+func is_out_of_view():
+	if self.position.x < left - 350: #if the player's position goes passed the left size...
+		queue_free()#... teleport the player to the right with the same y axis
+	if self.position.x > right + 350:
+		queue_free()
+	if self.position.y < up - 350:
+		queue_free()
+	if self.position.y > down + 350:
+		queue_free()
 	

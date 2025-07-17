@@ -7,16 +7,18 @@ func _ready():
 	z_index = 100
 	z_as_relative = false
 
+func _physics_process(delta: float) -> void:
+	if accel > 0:
+		velocity_slow(delta)
+		wrap_screen()
+
 func _on_astrynite_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Player"):
 		GameManager.add_currency("Astrynite", multiplier)
 		#Tween animation!
 		queue_free()
 
-func _physics_process(delta: float) -> void:
-	if accel > 0:
-		velocity_slow(delta)
-	wrap_screen()
+
 
 func velocity_slow(delta):
 	self.position += Vector2.RIGHT.rotated(rotation) * accel * delta

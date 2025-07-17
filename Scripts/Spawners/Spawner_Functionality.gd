@@ -2,8 +2,10 @@ extends Node2D
 
 @export var Asteroid_Scene : PackedScene
 @export var margin : int = 300
+@export var SpawnSpeed: float
 
 var can_spawn = false
+
 
 func _ready():
 	#Avoids same set location when starting game
@@ -19,8 +21,8 @@ func _physics_process(delta: float) -> void:
 	if can_spawn:
 		spawn_asteroid()
 		set_random_spawn()
-		
-	
+	decrease_spawn_speed()
+
 func get_player_pos():
 	look_at(GameManager.player_pos)
 
@@ -64,5 +66,9 @@ func spawn_asteroid():
 	get_parent().add_child(asteroid)
 	
 	#Spawn Cooldown
-	await get_tree().create_timer(0.57).timeout
+	await get_tree().create_timer(SpawnSpeed).timeout
 	can_spawn = true
+
+func decrease_spawn_speed():
+	if SpawnSpeed >= 0.5:
+		SpawnSpeed -= 0.000001

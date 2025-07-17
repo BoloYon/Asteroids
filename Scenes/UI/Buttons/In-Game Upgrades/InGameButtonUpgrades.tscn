@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://emwl33h5r7fi"]
+
+[ext_resource type="FontFile" uid="uid://e4iuksqey7qm" path="res://Fonts/Inter Fonts/Inter_18pt-Bold.ttf" id="1_rgdfc"]
+[ext_resource type="Script" uid="uid://bytjjoswfb7j2" path="res://Scripts/UI/InGameUpgrades/in_game_button_upgrades.gd" id="1_xf2rn"]
+
+[node name="InGameButtonUpgrades" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xf2rn")
+
+[node name="PenLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 245.0
+offset_top = 912.0
+offset_right = 433.0
+offset_bottom = 961.0
+theme_override_fonts/font = ExtResource("1_rgdfc")
+theme_override_font_sizes/font_size = 18
+text = "Penetration Upgrade:
+Level: 0"
+horizontal_alignment = 1
+
+[node name="Penetration" type="Button" parent="PenLabel"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 49.0
+offset_right = 189.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("1_rgdfc")
+theme_override_font_sizes/font_size = 51
+text = "10"
+
+[node name="SpeedLabel" type="Label" parent="."]
+offset_left = 478.0
+offset_top = 912.0
+offset_right = 666.0
+offset_bottom = 961.0
+theme_override_fonts/font = ExtResource("1_rgdfc")
+theme_override_font_sizes/font_size = 18
+text = "Speed Upgrade:
+Level: 0"
+horizontal_alignment = 1
+
+[node name="Speed" type="Button" parent="SpeedLabel"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 49.0
+offset_right = 189.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("1_rgdfc")
+theme_override_font_sizes/font_size = 51
+text = "0.25"
+
+[connection signal="pressed" from="PenLabel/Penetration" to="." method="_on_penetration_upgrade_pressed"]
+[connection signal="pressed" from="SpeedLabel/Speed" to="." method="_on_speed_upgrade_pressed"]
