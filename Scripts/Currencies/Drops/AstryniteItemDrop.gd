@@ -22,7 +22,7 @@ func _on_astrynite_area_2d_area_entered(area: Area2D) -> void:
 
 func velocity_slow(delta):
 	self.position += Vector2.RIGHT.rotated(rotation) * accel * delta
-	accel -= 1.5
+	accel -= 3
 
 func wrap_screen():
 	#Get the viewport's visibility rectangle

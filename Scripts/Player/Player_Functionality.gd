@@ -5,10 +5,12 @@ extends Node2D
 
 var can_shoot = true
 
-func _ready():
+func _ready() -> void:
 	GameManager.set_bullet_damage(bullet_damage)
-##Basic Movement Functionality
-func _physics_process(delta: float):
+	
+func _physics_process(delta: float) -> void:
+	#Start counting for the time spent in-game
+	GameManager.runtime += delta
 	#Move the player based on input
 	move_player(delta)
 	#Face the direction where the mouse is pointing at
@@ -86,7 +88,7 @@ func move_player(delta: float) -> void :
 	#Set position
 	self.position = pos
 
-func shoot():
+func shoot() -> void:
 	#Set boolean to false for cooldown
 	can_shoot = false
 	#Make the bullet exist. The bullet comes with a set speed, but can be tweaked
@@ -102,10 +104,10 @@ func shoot():
 	await get_tree().create_timer(1).timeout
 	can_shoot = true
 
-func face_mouse():
+func face_mouse() -> void:
 	look_at(get_global_mouse_position())
 
-func wrap_screen():
+func wrap_screen() -> void:
 	#Get the viewport's visibility rectangle
 	var rect = get_viewport().get_visible_rect()
 	
@@ -132,8 +134,11 @@ func wrap_screen():
 	self.position = player_pos
 
 func _on_player_hitbox_area_entered(area: Area2D) -> void:
-	if area.is_in_group("Asteroid"):
-		print("COLLISION DETECTED, ", area)
-		GameManager.resources["Astrynite"] = 0
-		CUps.reset()
-		get_parent().get_tree().reload_current_scene()
+	if area.is_in_group("Asteroid") and area.is_visible_in_tree():
+		set_UI_on_death()
+		get_tree().paused = true
+
+func set_UI_on_death():
+	get_parent().get_node("DeathScreen").show()
+	get_parent().get_node("InGameButtonUpgrades").hide()
+	get_parent().get_node("MaterialList").hide()

@@ -1,0 +1,263 @@
+[gd_scene load_steps=6 format=3 uid="uid://taqvi18nymha"]
+
+[ext_resource type="Script" uid="uid://b3o8kk0wkx56s" path="res://Scripts/UI/Death_Screen.gd" id="1_vbq58"]
+[ext_resource type="FontFile" uid="uid://e4iuksqey7qm" path="res://Fonts/Inter Fonts/Inter_18pt-Bold.ttf" id="2_8ws65"]
+[ext_resource type="Texture2D" uid="uid://tixjsth2fqll" path="res://Sprites/Currencies/CurrencyUI/Astrynite Currency.png" id="3_8ws65"]
+[ext_resource type="Texture2D" uid="uid://cqapp34psefbo" path="res://Sprites/Currencies/CurrencyUI/Glintcore Currency.png" id="4_mq2ut"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mq2ut"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="DeathScreen" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vbq58")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -380.725
+offset_top = -505.3
+offset_right = 235.275
+offset_bottom = 303.7
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.25, 1.25)
+theme_override_styles/panel = SubResource("StyleBoxFlat_mq2ut")
+
+[node name="NewRun" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 5.37998
+offset_top = 703.44
+offset_right = 904.38
+offset_bottom = 1014.44
+scale = Vector2(0.325, 0.325)
+theme_override_fonts/font = ExtResource("2_8ws65")
+theme_override_font_sizes/font_size = 200
+text = "New Run"
+
+[node name="Home" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 318.98
+offset_top = 703.44
+offset_right = 1217.98
+offset_bottom = 1014.44
+scale = Vector2(0.325, 0.325)
+theme_override_fonts/font = ExtResource("2_8ws65")
+theme_override_font_sizes/font_size = 200
+text = "Home"
+
+[node name="DeathMessage" type="Label" parent="Panel"]
+z_index = 1
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 14494.0
+offset_bottom = 2044.0
+scale = Vector2(0.042, 0.042)
+theme_override_fonts/font = ExtResource("2_8ws65")
+theme_override_font_sizes/font_size = 1686
+text = "Simulation Ended"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="Panel/DeathMessage"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = 10.0
+offset_right = 7.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.281187, 0.281187, 0.281187, 0.898039)
+
+[node name="ResourcesTitle" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 1.37998
+offset_top = 127.44
+offset_right = 11182.4
+offset_bottom = 1490.44
+scale = Vector2(0.055, 0.055)
+theme_override_fonts/font = ExtResource("2_8ws65")
+theme_override_font_sizes/font_size = 1126
+text = "Resources:"
+horizontal_alignment = 1
+
+[node name="Astrynite" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 217.96
+offset_top = 210.88
+offset_right = 5012.96
+offset_bottom = 1506.88
+scale = Vector2(0.039, 0.039)
+theme_override_colors/font_color = Color(0.760784, 0.454902, 0.337255, 1)
+theme_override_fonts/font = ExtResource("2_8ws65")
+theme_override_font_sizes/font_size = 1070
+text = "Astrynite"
+horizontal_alignment = 1
+
+[node name="TextureRect3" type="TextureRect" parent="Panel/Astrynite"]
+layout_mode = 0
+offset_left = 6159.49
+offset_top = 75.8979
+offset_right = 6239.49
+offset_bottom = 155.897
+scale = Vector2(-16.9, 16.9)
+texture = ExtResource("3_8ws65")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="TextureRect4" type="TextureRect" parent="Panel/Astrynite"]
+layout_mode = 0
+offset_left = -1435.9
+offset_top = 82.0515
+offset_right = -1355.9
+offset_bottom = 162.051
+scale = Vector2(16.9, 16.9)
+texture = ExtResource("3_8ws65")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="AstNum" type="Label" parent="Panel/Astrynite"]
+layout_mode = 0
+offset_left = -5559.0
+offset_top = 1374.0
+offset_right = 79819.0
+offset_bottom = 7092.0
+scale = Vector2(0.185, 0.185)
+theme_override_colors/font_color = Color(0.759607, 0.454503, 0.336377, 1)
+theme_override_fonts/font = ExtResource("2_8ws65")
+theme_override_font_sizes/font_size = 4725
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Glintcore" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 212.36
+offset_top = 319.68
+offset_right = 1848.36
+offset_bottom = 719.68
+scale = Vector2(0.12, 0.12)
+theme_override_colors/font_color = Color(0.992157, 0.972549, 0.627451, 1)
+theme_override_fonts/font = ExtResource("2_8ws65")
+theme_override_font_sizes/font_size = 330
+text = "Glintcores"
+horizontal_alignment = 1
+
+[node name="GlintNum" type="Label" parent="Panel/Glintcore"]
+layout_mode = 0
+offset_left = -1740.0
+offset_top = 407.0
+offset_right = 58335.0
+offset_bottom = 4546.0
+scale = Vector2(0.085, 0.085)
+theme_override_colors/font_color = Color(0.992157, 0.972549, 0.627451, 1)
+theme_override_fonts/font = ExtResource("2_8ws65")
+theme_override_font_sizes/font_size = 3420
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Glintcore"]
+layout_mode = 0
+offset_left = -773.333
+offset_top = -200.0
+offset_right = -693.333
+offset_bottom = -120.0
+scale = Vector2(8.265, 8.265)
+texture = ExtResource("4_mq2ut")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="Panel/Glintcore"]
+layout_mode = 0
+offset_left = 1760.0
+offset_top = -200.0
+offset_right = 1840.0
+offset_bottom = -120.0
+scale = Vector2(8.265, 8.265)
+texture = ExtResource("4_mq2ut")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="WaveTitle2" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 231.78
+offset_top = 430.64
+offset_right = 4104.78
+offset_bottom = 1993.64
+scale = Vector2(0.04, 0.04)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_8ws65")
+theme_override_font_sizes/font_size = 1291
+text = "Wave:"
+horizontal_alignment = 1
+
+[node name="CurrentWave2" type="Label" parent="Panel/WaveTitle2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -7676.5
+offset_top = -3.0
+offset_right = 82794.5
+offset_bottom = 6375.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.17, 0.17)
+theme_override_colors/font_color = Color(0.854902, 0.490196, 0.176471, 1)
+theme_override_fonts/font = ExtResource("2_8ws65")
+theme_override_font_sizes/font_size = 5270
+text = "0"
+horizontal_alignment = 1
+
+[node name="HighScore" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 135.78
+offset_top = 538.64
+offset_right = 8348.78
+offset_bottom = 1962.64
+scale = Vector2(0.043, 0.043)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_8ws65")
+theme_override_font_sizes/font_size = 1176
+text = "Highest Wave:"
+horizontal_alignment = 1
+
+[node name="HighestWave" type="Label" parent="Panel/HighScore"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -7213.5
+offset_top = 9.0
+offset_right = 17035.5
+offset_bottom = 1704.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.59, 0.59)
+theme_override_colors/font_color = Color(0.290196, 0.705882, 0.678431, 1)
+theme_override_fonts/font = ExtResource("2_8ws65")
+theme_override_font_sizes/font_size = 1400
+text = "0"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Panel/NewRun" to="." method="_on_new_run_pressed"]

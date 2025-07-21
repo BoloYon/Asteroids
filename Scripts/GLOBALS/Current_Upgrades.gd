@@ -7,7 +7,7 @@ var upgrades := {
 		"level": 0,
 		"base_cost": 0.25,
 		"cost_multiplier": 1.4,
-		"effect_per_level": 1.0
+		"effect_per_level": 5.0
 		
 	},
 	"Penetration":{

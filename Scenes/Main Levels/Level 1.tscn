@@ -1,11 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdkyfar1vhp0"]
+[gd_scene load_steps=8 format=3 uid="uid://bdkyfar1vhp0"]
 
 [ext_resource type="PackedScene" uid="uid://b746qw4euf53o" path="res://Scenes/Player/Ship/Player Skins/Player_Default.tscn" id="1_bexes"]
+[ext_resource type="Script" uid="uid://5th5lj308qj7" path="res://Scenes/Main Levels/Level1Waves.gd" id="1_iukfo"]
 [ext_resource type="PackedScene" uid="uid://b5v0wnts3n0vj" path="res://Scenes/Spawners/Spawner.tscn" id="2_rn67t"]
 [ext_resource type="PackedScene" uid="uid://d1jxffnlkq8ke" path="res://Scenes/UI/MaterialList.tscn" id="3_rn67t"]
 [ext_resource type="PackedScene" uid="uid://emwl33h5r7fi" path="res://Scenes/UI/Buttons/In-Game Upgrades/InGameButtonUpgrades.tscn" id="4_2vjh8"]
+[ext_resource type="PackedScene" uid="uid://taqvi18nymha" path="res://Scenes/UI/DeathScreen.tscn" id="5_k6bw2"]
+[ext_resource type="PackedScene" uid="uid://bvbdsnm1bfbq1" path="res://Scenes/UI/ProgressBar.tscn" id="7_1uyrb"]
 
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_iukfo")
 
 [node name="PlayerDefault" parent="." instance=ExtResource("1_bexes")]
 position = Vector2(991, 521)
@@ -15,5 +19,29 @@ position = Vector2(469, 169)
 SpawnSpeed = 5.0
 
 [node name="MaterialList" parent="." instance=ExtResource("3_rn67t")]
+z_index = 4096
+z_as_relative = false
 
 [node name="InGameButtonUpgrades" parent="." instance=ExtResource("4_2vjh8")]
+z_index = 4096
+z_as_relative = false
+
+[node name="DeathScreen" parent="." instance=ExtResource("5_k6bw2")]
+visible = false
+z_index = 4083
+z_as_relative = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 953.945
+offset_top = 542.0
+offset_right = 953.945
+offset_bottom = 542.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ProgressBar" parent="." instance=ExtResource("7_1uyrb")]
+offset_left = 957.0
+offset_right = 957.0

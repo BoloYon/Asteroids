@@ -21,7 +21,9 @@ func _physics_process(delta: float) -> void:
 	if can_spawn:
 		spawn_asteroid()
 		set_random_spawn()
-	decrease_spawn_speed()
+	if(GameManager.spawn_Boss):
+		spawn_Boss_asteroid()
+	
 
 func get_player_pos():
 	look_at(GameManager.player_pos)
@@ -54,21 +56,43 @@ func set_random_spawn():
 			self.position = Vector2(rand, down)
 
 func spawn_asteroid():
-	#Set boolean
-	can_spawn = false
+	if(not GameManager.boss_isAlive):
+		#Set boolean
+		can_spawn = false
+		
+		var asteroid = Asteroid_Scene.instantiate()
+		asteroid.position = self.position
+		asteroid.health = 5 * pow(GameManager.wave, 1.25) #Base health * multiplier
+		asteroid.size = randf_range(0.04, 0.12)
+		asteroid.rotation = self.rotation + (randf_range(0,0.5)) #Slight and random offset to avoid constant targeting
+		asteroid.accel = randf_range(100,340)
+		asteroid.add_to_group("regular asteroid")
+		get_parent().add_child(asteroid)
+		
+		#Spawn Cooldown
+		await get_tree().create_timer(SpawnSpeed).timeout
+		can_spawn = true
+		decrease_spawn_speed()
 	
-	var asteroid = Asteroid_Scene.instantiate()
-	asteroid.position = self.position
-	asteroid.size = randf_range(0.04, 0.12)
-	asteroid.rotation = self.rotation + (randf_range(0,0.5)) #Slight and random offset to avoid constant targeting
-	asteroid.accel = randf_range(100,340)
-	asteroid.lifetime = 10
-	get_parent().add_child(asteroid)
-	
-	#Spawn Cooldown
-	await get_tree().create_timer(SpawnSpeed).timeout
-	can_spawn = true
+func spawn_Boss_asteroid():
+	if (GameManager.spawn_Boss):
+		GameManager.boss_checker += 1
+		GameManager.spawn_Boss = false
+		GameManager.boss_isAlive = true
+		
+		var BossAsteroid = Asteroid_Scene.instantiate()
+		
+		BossAsteroid.position = self.position
+		BossAsteroid.health = pow((GameManager.wave * 10),1.234);
+		BossAsteroid.add_to_group("Boss")
+		BossAsteroid.size = randf_range(0.24, 0.36)
+		BossAsteroid.rotation = self.rotation + (randf_range(0,0.5)) #Slight and random offset to avoid constant targeting
+		BossAsteroid.accel = randf_range(100,200)
+		get_parent().add_child(BossAsteroid)
+		
+		
 
 func decrease_spawn_speed():
 	if SpawnSpeed >= 0.5:
-		SpawnSpeed -= 0.000001
+		SpawnSpeed *= 0.98 - (GameManager.wave * 0.02)
+		

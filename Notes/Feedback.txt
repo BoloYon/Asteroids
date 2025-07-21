@@ -1,0 +1,5 @@
+Things to add:
+	Multishot upgrade
+	Reload speed upgrade
+	Change movement speed upgrade amount: Set to +5 speed per level
+	
