@@ -6,6 +6,7 @@ extends Node2D
 @export var Asteroid_Scene : PackedScene = preload("res://Scenes/Asteroids/Asteroid_Default.tscn")
 @export var DropAmount: int
 
+var margin : int
 
 var accel : float
 
@@ -20,6 +21,8 @@ var down : float
 
 func _ready():
 	scale = Vector2(size, size)
+	
+	#DONT REMOVE
 	var rect = get_viewport().get_visible_rect()
 	
 #Define the sides (edges) for easier understanding
@@ -79,21 +82,27 @@ func is_out_of_view():
 		queue_free()
 
 func wrap_screen():
+	if is_in_group("Boss"):
+		margin = 400
+	elif is_in_group("MiniBoss"):
+		margin = 300
+	elif is_in_group("BabyBoss"):
+		margin = 200
 	#Get the viewport's visibility rectangle
 	var rect = get_viewport().get_visible_rect()
 	
 	#Define the sides (edges) for easier understanding
-	var left = rect.position.x
-	var right = rect.position.x + rect.size.x
-	var up = rect.position.y
-	var down = rect.position.y + rect.size.y
+	var left = rect.position.x - margin
+	var right = rect.position.x + rect.size.x + margin
+	var up = rect.position.y - margin
+	var down = rect.position.y + rect.size.y + margin
 	
 	#Define the player's positios
 	var pos = self.position
 	
 	#Actual screen wrapping code
 	if pos.x < left: #if the player's position goes passed the left size...
-		pos.x = right#... teleport the player to the right with the same y axis
+		pos.x = right #... teleport the player to the right with the same y axis
 	if pos.x > right:
 		pos.x = left
 	if pos.y < up:

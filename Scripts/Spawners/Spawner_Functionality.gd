@@ -1,15 +1,18 @@
 extends Node2D
 
 @export var Asteroid_Scene : PackedScene
-@export var margin : int = 300
 @export var SpawnSpeed: float
+@export var wave_manager: Node
 
 var can_spawn = false
 
 
 func _ready():
+	#Connect the spawn boss signal from wave manager 
+	get_parent().get_node("WaveManager").boss_spawn_requested.connect(_on_boss_spawn_requested)
+	
 	#Avoids same set location when starting game
-	set_random_spawn() 
+	set_random_spawn_regular() 
 	#Gives player a chance to see the scene
 	await get_tree().create_timer(1).timeout 
 	can_spawn = true
@@ -20,15 +23,41 @@ func _physics_process(delta: float) -> void:
 	#If cooldown is done, spawn asteroids and set a random spawn point
 	if can_spawn:
 		spawn_asteroid()
-		set_random_spawn()
-	if(GameManager.spawn_Boss):
-		spawn_Boss_asteroid()
+		set_random_spawn_regular()
 	
 
 func get_player_pos():
 	look_at(GameManager.player_pos)
 
-func set_random_spawn():
+func set_random_spawn_regular():
+	#Get the viewport's visibility rectangle
+	var rect = get_viewport().get_visible_rect()
+	
+	#Define the sides (edges) for easier understanding
+	var left = rect.position.x - 300
+	var right = rect.position.x + rect.size.x + 300
+	var up = rect.position.y - 300
+	var down = rect.position.y + rect.size.y + 300
+	
+	#Make an array to randomly choose a number which corresponds to one of the directions
+	var directions = ["left", "right", "up", "down"]
+	var rand_picker = randi_range(0,3)
+	match directions[rand_picker]:
+		"left":
+			var rand = randf_range(up, down)
+			self.position = Vector2(left, rand)
+		"right":
+			var rand = randf_range(up, down)
+			self.position = Vector2(right, rand)
+		"up":
+			var rand = randf_range(left, right)
+			self.position = Vector2(rand, up)
+		"down":
+			var rand = randf_range(left, right)
+			self.position = Vector2(rand, down)
+
+func set_random_spawn_boss():
+	var margin : int = 400
 	#Get the viewport's visibility rectangle
 	var rect = get_viewport().get_visible_rect()
 	
@@ -56,7 +85,7 @@ func set_random_spawn():
 			self.position = Vector2(rand, down)
 
 func spawn_asteroid():
-	if(not GameManager.boss_isAlive):
+	if(GameManager.boss_checker == 0):
 		#Set boolean
 		can_spawn = false
 		
@@ -73,26 +102,28 @@ func spawn_asteroid():
 		await get_tree().create_timer(SpawnSpeed).timeout
 		can_spawn = true
 		decrease_spawn_speed()
-	
+
+func _on_boss_spawn_requested():
+	set_random_spawn_boss()
+	spawn_Boss_asteroid()
+
 func spawn_Boss_asteroid():
-	if (GameManager.spawn_Boss):
-		GameManager.boss_checker += 1
-		GameManager.spawn_Boss = false
-		GameManager.boss_isAlive = true
+	GameManager.boss_checker += 1
 		
-		var BossAsteroid = Asteroid_Scene.instantiate()
+	var BossAsteroid = Asteroid_Scene.instantiate()
 		
-		BossAsteroid.position = self.position
-		BossAsteroid.health = pow((GameManager.wave * 10),1.234);
-		BossAsteroid.add_to_group("Boss")
-		BossAsteroid.size = randf_range(0.24, 0.36)
-		BossAsteroid.rotation = self.rotation + (randf_range(0,0.5)) #Slight and random offset to avoid constant targeting
-		BossAsteroid.accel = randf_range(100,200)
-		get_parent().add_child(BossAsteroid)
+	BossAsteroid.position = self.position
+	BossAsteroid.health = pow((GameManager.wave * 10),1.234);
+	BossAsteroid.add_to_group("Boss")
+	BossAsteroid.size = randf_range(0.36, 0.36)
+	BossAsteroid.rotation = self.rotation + (randf_range(0,0.5)) #Slight and random offset to avoid constant targeting
+	BossAsteroid.accel = randf_range(100,200)
+	get_parent().add_child(BossAsteroid)
 		
 		
 
 func decrease_spawn_speed():
-	if SpawnSpeed >= 0.5:
-		SpawnSpeed *= 0.98 - (GameManager.wave * 0.02)
+	var min_speed = 0.25
+	var multiplier = max(0.5, 0.98 - (GameManager.wave * 0.01))
+	SpawnSpeed = max(min_speed, SpawnSpeed * multiplier)
 		

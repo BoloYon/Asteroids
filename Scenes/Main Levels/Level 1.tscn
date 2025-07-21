@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdkyfar1vhp0"]
+[gd_scene load_steps=9 format=3 uid="uid://bdkyfar1vhp0"]
 
 [ext_resource type="PackedScene" uid="uid://b746qw4euf53o" path="res://Scenes/Player/Ship/Player Skins/Player_Default.tscn" id="1_bexes"]
 [ext_resource type="Script" uid="uid://5th5lj308qj7" path="res://Scenes/Main Levels/Level1Waves.gd" id="1_iukfo"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://emwl33h5r7fi" path="res://Scenes/UI/Buttons/In-Game Upgrades/InGameButtonUpgrades.tscn" id="4_2vjh8"]
 [ext_resource type="PackedScene" uid="uid://taqvi18nymha" path="res://Scenes/UI/DeathScreen.tscn" id="5_k6bw2"]
 [ext_resource type="PackedScene" uid="uid://bvbdsnm1bfbq1" path="res://Scenes/UI/ProgressBar.tscn" id="7_1uyrb"]
+[ext_resource type="PackedScene" uid="uid://cooygl87cw8m6" path="res://Scenes/Spawners/Wave Manager.tscn" id="8_1uyrb"]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_iukfo")
@@ -45,3 +46,6 @@ size_flags_vertical = 4
 [node name="ProgressBar" parent="." instance=ExtResource("7_1uyrb")]
 offset_left = 957.0
 offset_right = 957.0
+
+[node name="WaveManager" parent="." instance=ExtResource("8_1uyrb")]
+wave_duration = 70.0

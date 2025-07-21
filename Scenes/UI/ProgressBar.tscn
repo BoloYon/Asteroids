@@ -1,12 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvbdsnm1bfbq1"]
+[gd_scene load_steps=5 format=3 uid="uid://bvbdsnm1bfbq1"]
 
 [ext_resource type="Script" uid="uid://c0yaywaerq04x" path="res://Scripts/UI/progress_bar.gd" id="1_wkhin"]
+[ext_resource type="FontFile" uid="uid://e4iuksqey7qm" path="res://Fonts/Inter Fonts/Inter_18pt-Bold.ttf" id="3_24xq2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cysiy"]
 bg_color = Color(0, 0, 0, 0.615686)
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_24xq2"]
 bg_color = Color(0.521141, 0.521141, 0.52114, 1)
+anti_aliasing = false
 
 [node name="ProgressBar" type="Control"]
 layout_mode = 3
@@ -34,3 +37,30 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_24xq2")
 max_value = 1.0
 step = 0.001
 value = 1.0
+
+[node name="Control" type="Control" parent="ProgressBar"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WaveLabel" type="Label" parent="ProgressBar/Control"]
+layout_mode = 0
+offset_left = 592.0
+offset_top = 31.0
+offset_right = 2975.0
+offset_bottom = 771.0
+scale = Vector2(0.045, 0.045)
+theme_override_fonts/font = ExtResource("3_24xq2")
+theme_override_font_sizes/font_size = 611
+text = "Wave: 0"
+
+[node name="NumOBossesLabel" type="Label" parent="ProgressBar/Control"]
+layout_mode = 0
+offset_left = 1083.0
+offset_top = 31.0
+offset_right = 5253.0
+offset_bottom = 771.0
+scale = Vector2(0.045, 0.045)
+theme_override_fonts/font = ExtResource("3_24xq2")
+theme_override_font_sizes/font_size = 611
+text = "# of Bosses: 0"

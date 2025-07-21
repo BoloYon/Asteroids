@@ -194,7 +194,7 @@ texture = ExtResource("4_mq2ut")
 expand_mode = 3
 stretch_mode = 4
 
-[node name="WaveTitle2" type="Label" parent="Panel"]
+[node name="WaveTitle" type="Label" parent="Panel"]
 layout_mode = 0
 offset_left = 231.78
 offset_top = 430.64
@@ -207,7 +207,7 @@ theme_override_font_sizes/font_size = 1291
 text = "Wave:"
 horizontal_alignment = 1
 
-[node name="CurrentWave2" type="Label" parent="Panel/WaveTitle2"]
+[node name="CurrentWave" type="Label" parent="Panel/WaveTitle"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -227,7 +227,7 @@ theme_override_font_sizes/font_size = 5270
 text = "0"
 horizontal_alignment = 1
 
-[node name="HighScore" type="Label" parent="Panel"]
+[node name="HighScoreTitle" type="Label" parent="Panel"]
 layout_mode = 0
 offset_left = 135.78
 offset_top = 538.64
@@ -240,7 +240,7 @@ theme_override_font_sizes/font_size = 1176
 text = "Highest Wave:"
 horizontal_alignment = 1
 
-[node name="HighestWave" type="Label" parent="Panel/HighScore"]
+[node name="HighestWave" type="Label" parent="Panel/HighScoreTitle"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5

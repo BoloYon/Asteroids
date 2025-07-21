@@ -142,3 +142,4 @@ func set_UI_on_death():
 	get_parent().get_node("DeathScreen").show()
 	get_parent().get_node("InGameButtonUpgrades").hide()
 	get_parent().get_node("MaterialList").hide()
+	get_parent().get_node("ProgressBar/ProgressBar/Control").hide()

@@ -19,7 +19,6 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Asteroid") or area.is_in_group("Enemy"):
-		print("curr pen", curr_pen)
 		if curr_pen > 0:
 			curr_pen -= 1
 		else:

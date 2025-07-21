@@ -1,44 +1,33 @@
 extends Control
 
-var counter : float
-var boss_queued : bool 
+var wave_count : int
+var boss_num : int
+
 
 func _ready():
-	boss_queued = false 
-
-#BOSS SPAWNING AND BREAKAGE IS FIXED AND IMPLEMENTED, FIX BOSS DETECTION
-
-func _process(delta):
-	CheckBossStatus()
-	increaseTime(delta)
-	updateProgressBar()
-	call_NewWave()
-	if counter >= 1 and not (GameManager.boss_isAlive) and not boss_queued: #if counter is 100% AND boss is not alive
-		boss_queued = true
-		call_BossSpawn()
+	wave_count = 0
+	boss_num = 0
+	set_process(true)
 	
 
-
-func CheckBossStatus():
-	if GameManager.boss_checker == 0:
-		GameManager.boss_isAlive = false
-	else:
-		GameManager.boss_isAlive = true
-
-func increaseTime(delta) -> void:
-	GameManager.time += delta
+func _process(_delta: float) -> void:
+	if get_parent().get_node("WaveManager").boss_spawned:
+		$ProgressBar.value = 1
 	
-func getRatio() -> float :
-	counter = (GameManager.time/10) #1 Wave per 70 seconds
-	return counter
+	update_wave_count()
+	update_boss_count()
 	
-func updateProgressBar() -> void:
-	$ProgressBar.value = getRatio()
+	
+	var ratio = get_parent().get_node("WaveManager").time_accumulated / get_parent().get_node("WaveManager").wave_duration
+	$ProgressBar.value = ratio
+	
 
-func call_BossSpawn() -> void:
-	GameManager.spawn_Boss = true
-func call_NewWave () -> void:
-	if counter >= 1 and not GameManager.boss_isAlive:
-		boss_queued = false #Rese
-		GameManager.time = 0 #Reset time
-		GameManager.wave +=1 #Increase wave count
+func update_wave_count():
+	if GameManager.wave != wave_count:
+		wave_count = GameManager.wave
+		$ProgressBar/Control/WaveLabel.text = "Wave: %d" % wave_count
+	
+func update_boss_count():
+	if GameManager.boss_checker != boss_num:
+		boss_num = GameManager.boss_checker
+		$ProgressBar/Control/NumOBossesLabel.text = "# of Bosses: %d" % boss_num

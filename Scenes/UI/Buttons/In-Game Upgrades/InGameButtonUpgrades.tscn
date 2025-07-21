@@ -35,6 +35,7 @@ theme_override_font_sizes/font_size = 51
 text = "10"
 
 [node name="SpeedLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = 478.0
 offset_top = 912.0
 offset_right = 666.0
