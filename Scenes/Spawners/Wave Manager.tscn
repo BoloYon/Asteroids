@@ -4,3 +4,4 @@
 
 [node name="WaveManager" type="Node"]
 script = ExtResource("1_q763b")
+wave_duration = 10.0

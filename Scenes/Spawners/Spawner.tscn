@@ -3,10 +3,9 @@
 [ext_resource type="Script" uid="uid://d0k1lau1pgopj" path="res://Scripts/Spawners/Spawner_Functionality.gd" id="1_alich"]
 [ext_resource type="PackedScene" uid="uid://dy4ld7f8qqmrb" path="res://Scenes/Asteroids/Asteroid_Default.tscn" id="2_sx76e"]
 
-[node name="Spawner" type="Node2D" node_paths=PackedStringArray("wave_manager")]
+[node name="Spawner" type="Node2D"]
 script = ExtResource("1_alich")
 Asteroid_Scene = ExtResource("2_sx76e")
-wave_manager = NodePath("")
 
 [node name="Line2D" type="Line2D" parent="."]
 visible = false

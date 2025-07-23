@@ -91,7 +91,7 @@ func spawn_asteroid():
 		
 		var asteroid = Asteroid_Scene.instantiate()
 		asteroid.position = self.position
-		asteroid.health = 5 * pow(GameManager.wave, 1.25) #Base health * multiplier
+		asteroid.max_health = 1.5 + 5 * pow(GameManager.wave, 1.25) #Base health * multiplier
 		asteroid.size = randf_range(0.04, 0.12)
 		asteroid.rotation = self.rotation + (randf_range(0,0.5)) #Slight and random offset to avoid constant targeting
 		asteroid.accel = randf_range(100,340)
@@ -113,9 +113,9 @@ func spawn_Boss_asteroid():
 	var BossAsteroid = Asteroid_Scene.instantiate()
 		
 	BossAsteroid.position = self.position
-	BossAsteroid.health = pow((GameManager.wave * 10),1.234);
+	BossAsteroid.max_health = 10 + pow((GameManager.wave * 10),1.234);
 	BossAsteroid.add_to_group("Boss")
-	BossAsteroid.size = randf_range(0.36, 0.36)
+	BossAsteroid.size = randf_range(0.30, 0.36)
 	BossAsteroid.rotation = self.rotation + (randf_range(0,0.5)) #Slight and random offset to avoid constant targeting
 	BossAsteroid.accel = randf_range(100,200)
 	get_parent().add_child(BossAsteroid)

@@ -1,12 +1,11 @@
 extends Node2D
 
 @export var speed : float = 300.0
-@export var bullet_damage: float
 
 var can_shoot = true
 
 func _ready() -> void:
-	GameManager.set_bullet_damage(bullet_damage)
+	pass
 	
 func _physics_process(delta: float) -> void:
 	#Start counting for the time spent in-game
@@ -32,9 +31,13 @@ func move_player(delta: float) -> void :
 	#Initilalizing Positions
 	var pos := self.position
 	
+	#Initializing paths
+	var speed_lvl = CUps.upgrades["Player Upgrades"]["Speed"]["level"]
+	var speed_per_lvl = CUps.upgrades["Player Upgrades"]["Speed"]["effect_per_level"]
+	
 	#Initilalizing Speeds
-	var accel : float = ((speed + CUps.upgrades["Speed"]["level"] * CUps.upgrades["Speed"]["effect_per_level"]) * delta) 
-	var diag_accel := (sqrt(2 * pow(speed + (CUps.upgrades["Speed"]["level"] * CUps.upgrades["Speed"]["effect_per_level"]), 2)) * delta)/2
+	var accel : float = ((speed + speed_lvl * speed_per_lvl) * delta) 
+	var diag_accel := (sqrt(2 * pow(speed + (speed_lvl * speed_per_lvl), 2)) * delta)/2
 	
 	#Initializing logic that detects if we are currently going diagonal
 	var diag_active := false
@@ -89,14 +92,23 @@ func move_player(delta: float) -> void :
 	self.position = pos
 
 func shoot() -> void:
+	#Set variables for easier reading
+	var pen_lvl = CUps.upgrades["Bullet Upgrades"]["Penetration"]["level"]
+	var pen_per_lvl = CUps.upgrades["Bullet Upgrades"]["Penetration"]["effect_per_level"]
+	
+	var bull_spd = CUps.upgrades["Bullet Upgrades"]["Speed"]["level"]
+	var spd_per_lvl = CUps.upgrades["Bullet Upgrades"]["Speed"]["effect_per_level"]
+	
 	#Set boolean to false for cooldown
 	can_shoot = false
+	
 	#Make the bullet exist. The bullet comes with a set speed, but can be tweaked
 	var bullet = preload("res://Scenes/Player/Ship/Bullet Skins/Bullet_Default.tscn").instantiate()
 	bullet.position = global_position
 	bullet.rotation = rotation #Where the ship is actually facing
 	bullet.lifetime = 5.0
-	bullet.penetration = CUps.upgrades["Penetration"]["level"] * CUps.upgrades["Penetration"]["effect_per_level"]
+	bullet.speed = 600 + (bull_spd * spd_per_lvl)
+	bullet.penetration = pen_lvl * pen_per_lvl
 	
 	get_parent().add_child(bullet)
 	

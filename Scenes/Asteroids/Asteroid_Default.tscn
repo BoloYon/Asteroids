@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dy4ld7f8qqmrb"]
+[gd_scene load_steps=6 format=3 uid="uid://dy4ld7f8qqmrb"]
 
 [ext_resource type="Script" uid="uid://djma2hf8tcjlp" path="res://Scripts/Asteroids/Asteroid_Functionality.gd" id="1_xb1l8"]
 [ext_resource type="Texture2D" uid="uid://3njvldvg1nxd" path="res://Sprites/Asteroids/Asteroid Basic.png" id="2_kj541"]
@@ -6,12 +6,37 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_a2w70"]
 radius = 1055.18
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xb1l8"]
+bg_color = Color(100, 0, 0.181, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kj541"]
+bg_color = Color(0.0604583, 0.821543, 0.050836, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+anti_aliasing = false
+
 [node name="AsteroidDefault" type="Node2D"]
 position = Vector2(960, 679)
 scale = Vector2(0.12, 0.12)
 script = ExtResource("1_xb1l8")
 lifetime = 10.0
-health = 5.0
 DropAmount = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -20,6 +45,33 @@ texture = ExtResource("2_kj541")
 [node name="Hitbox" type="Area2D" parent="." groups=["Asteroid"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+visible = false
 shape = SubResource("CircleShape2D_a2w70")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 1158.33
+offset_bottom = 1158.33
+
+[node name="Health" type="ProgressBar" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -950.0
+offset_top = -1191.67
+offset_right = 942.0
+offset_bottom = -1117.67
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_xb1l8")
+theme_override_styles/fill = SubResource("StyleBoxFlat_kj541")
+value = 50.0
+show_percentage = false
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(-16.6665, -833.333, -16.6665, -1058.33)
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_asteroid_hitbox_area_entered"]

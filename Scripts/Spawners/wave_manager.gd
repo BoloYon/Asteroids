@@ -4,7 +4,7 @@ extends Node
 signal boss_spawn_requested
 
 #Make a wave duraion export to easily change it for debugging
-@export var wave_duration : float = 10.0
+@export var wave_duration : float 
 
 #Make variables for total time and if the boss is spawned
 var time_accumulated: float = 0.0

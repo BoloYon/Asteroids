@@ -1,7 +1,7 @@
 extends Node
 
 var player_pos : Vector2
-var bullet_damage: float
+var bullet_damage: float = 1.0
 
 var total_astrynite : float = 0
 var runtime : float = 0

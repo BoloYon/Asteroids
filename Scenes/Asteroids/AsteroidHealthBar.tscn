@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7k5ig26qhx7o"]
+
+[sub_resource type="GDScript" id="GDScript_fospo"]
+script/source = "extends Control
+
+var accel : float
+
+func _process(delta) -> void:
+	position += Vector2.RIGHT.rotated(rotation) * accel * delta
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0dcc"]
+bg_color = Color(100, 0, 0.181, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tqeqa"]
+bg_color = Color(0.0604583, 0.821543, 0.050836, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+anti_aliasing = false
+
+[node name="AsteroidHealthBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_fospo")
+
+[node name="Health" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -950.0
+offset_right = 950.0
+offset_bottom = 66.0
+grow_horizontal = 2
+scale = Vector2(0.06, 0.06)
+theme_override_styles/background = SubResource("StyleBoxFlat_k0dcc")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tqeqa")
+value = 50.0
+show_percentage = false

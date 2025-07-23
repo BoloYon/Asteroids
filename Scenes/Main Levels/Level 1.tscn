@@ -48,4 +48,3 @@ offset_left = 957.0
 offset_right = 957.0
 
 [node name="WaveManager" parent="." instance=ExtResource("8_1uyrb")]
-wave_duration = 70.0

@@ -2,9 +2,11 @@ extends Node2D
 
 @export var lifetime: float
 @export var size: float
-@export var health: float
+@export var max_health: float
 @export var Asteroid_Scene : PackedScene = preload("res://Scenes/Asteroids/Asteroid_Default.tscn")
 @export var DropAmount: int
+
+var health : float
 
 var margin : int
 
@@ -20,6 +22,7 @@ var up : float
 var down : float
 
 func _ready():
+	health = max_health
 	scale = Vector2(size, size)
 	
 	#DONT REMOVE
@@ -30,14 +33,17 @@ func _ready():
 	right = rect.position.x + rect.size.x
 	up = rect.position.y
 	down = rect.position.y + rect.size.y
-	
-	
+
 func _physics_process(delta: float) -> void:
+	$Control.rotation = -self.rotation
+	$Control.position.y = -(scale.y/2 * 100)
 	move_asteroid(delta)
 	if is_in_group("regular asteroid") or is_in_group("BabyAsteroid"):
 		is_out_of_view()
 	else:
 		wrap_screen()
+	if max_health != health:
+		show_healthbar()
 	
 func move_asteroid(delta: float):
 	position += Vector2.RIGHT.rotated(rotation) * accel * delta
@@ -47,13 +53,11 @@ func _on_asteroid_hitbox_area_entered(area: Area2D) -> void:
 		health -= GameManager.bullet_damage
 		if health <= 0:
 			break_asteroid()
-		
+
 func break_asteroid():
 	var parent = get_parent()
 	ItemDrop.drop_astrynite(self.position, DropAmount, parent, accel, self.rotation)
 	asteroid_break_logic()
-	
-
 
 func asteroid_break_logic():
 	if (is_in_group("Boss")):
@@ -69,8 +73,7 @@ func asteroid_break_logic():
 		
 	if is_in_group("BabyAsteroid"):
 		break_Baby()
-	
-	
+
 func is_out_of_view():
 	if self.position.x < left - 350: #if the player's position goes passed the left size...
 		queue_free()#... teleport the player to the right with the same y axis
@@ -113,15 +116,11 @@ func wrap_screen():
 	#Set the position
 	self.position = pos
 
-
-
-
-
 func break_Boss():
 	for i in range(randi_range(4,7)):
 		GameManager.boss_checker += 1 #Adds x to boss checker
 		var miniBoss = Asteroid_Scene.instantiate()
-		miniBoss.health = self.health * .75
+		miniBoss.max_health = self.max_health * .75
 		miniBoss.position = self.position
 		miniBoss.rotation = randf_range(0, 360)
 		miniBoss.accel = self.accel
@@ -137,7 +136,7 @@ func break_MiniBoss():
 	for i in range(randi_range(4,7)):
 		GameManager.boss_checker += 1 #Adds x to boss checker
 		var babyBoss = Asteroid_Scene.instantiate()
-		babyBoss.health = self.health * .75
+		babyBoss.max_health = self.max_health * .75
 		babyBoss.position = self.position
 		babyBoss.rotation = randf_range(0, 360)
 		babyBoss.accel = self.accel
@@ -157,7 +156,7 @@ func break_BabyBoss():
 func break_Asteroid():
 	for i in range(randi_range(2, 3)):
 		var new_asteroid = Asteroid_Scene.instantiate()
-		new_asteroid.health = self.health * 0.25
+		new_asteroid.max_health = self.max_health * 0.25
 		new_asteroid.position = self.position
 		new_asteroid.rotation = randf_range(0, 360)
 		new_asteroid.accel = self.accel
@@ -170,3 +169,8 @@ func break_Asteroid():
 func break_Baby():
 	queue_free()
 	pass
+
+func show_healthbar() -> void:
+	if not $Control/Health.is_visible_in_tree():
+		$Control/Health.show()
+	$Control/Health.value = health/max_health * 100
